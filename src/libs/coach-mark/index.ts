@@ -52,7 +52,8 @@ export class CoachMark {
       const [svg, path] = this.createSvgElements()
       this.svg = svg
       this.path = path
-      body?.appendChild(svg)
+      this.svg.appendChild(this.path)
+      body?.appendChild(this.svg)
       body?.classList.add('coach-mark-active')
     }
 
@@ -67,11 +68,13 @@ export class CoachMark {
 
   dispose() {
     const body = document.querySelector('body')
+    body?.classList.remove('coach-mark-active')
     this.svg?.remove()
+    this.currentTarget?.classList.remove('coach-mark-target')
     this.svg = null
     this.path = null
-    this.currentTarget?.classList.remove('coach-mark-target')
-    body?.classList.remove('coach-mark-active')
+    this.frame = null
+    this.currentTarget = null
     window.removeEventListener('scroll', this.update)
     window.removeEventListener('resize', this.update)
   }
@@ -102,14 +105,12 @@ export class CoachMark {
   private createSvgElements(): [SVGElement, SVGPathElement] {
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
     const path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
-
     svg.setAttribute(
       'class',
       'fixed top-0 left-0 z-40 w-full h-full pointer-events-none'
     )
     path.setAttribute('class', 'fill-current text-black dark:text-white')
     path.setAttribute('fill', 'rgba(0,0,0,0.5)')
-    svg.appendChild(path)
     return [svg, path]
   }
 }

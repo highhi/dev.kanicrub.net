@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 
 export default function Page() {
   const coachMark = new CoachMark({
-    steps: [{ id: '#button-2' }, { id: '#button-1' }],
+    steps: [{ id: '#button-1' }, { id: '#button-2' }],
   })
 
   useEffect(() => {
