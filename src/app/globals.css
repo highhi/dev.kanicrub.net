@@ -31,3 +31,12 @@ body {
     text-wrap: balance;
   }
 }
+
+.coach-mark-active * {
+  pointer-events: none;
+}
+
+.coach-mark-target * {
+  pointer-events: auto;
+}
+
